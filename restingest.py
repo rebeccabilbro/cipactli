@@ -19,24 +19,23 @@ import requests
 
 DOJ_RELEASES_URL = 'http://www.justice.gov/api/v1/press_releases.json?pagesize=5'
 
+#########################################################################
+# Functions
+#########################################################################
 
-##########################################################################
-## Functions
-##########################################################################
-
-def fetch_press_releases():
+def fetch_press_releases(URL):
     """
     Performs a GET on the DOJ web service and return the array found in the
     'results' attribute of the JSON response
     """
     # execute a GET request and store the results
-    pass
+    response = requests.get(URL)
 
     # decode as json and store the results
-    pass
+    data = response.json()
 
     # return the 'results' array of press releases
-    pass
+    return data['results']
 
 
 def main():
@@ -44,13 +43,17 @@ def main():
     Main execution function to perform required actions
     """
     # fetch array of press releases
-    press_releases = fetch_press_releases()
+    press_releases = fetch_press_releases(DOJ_RELEASES_URL)
 
     # iterate press releases
     for release in press_releases:
 
-        # save content to a new file in the releases sub-directory
-        pass
+        # save content to a new file
+        fname = release['uuid']+'.json'
+        content = json.dumps(release)
+
+        with open(fname, 'w') as f:
+            f.write(content)
 
 
 ##########################################################################
