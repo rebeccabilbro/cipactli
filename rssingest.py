@@ -2,7 +2,7 @@
 # rssingest.py
 
 """
-Template for RSS exercise
+Sample solution for RSS exercise
 """
 ##########################################################################
 ## Imports
@@ -43,7 +43,9 @@ def save_article(title, content):
     Save HTML content using a slugged version of the title as the basis for
     the filename
     """
-    pass
+    fname = slugify(title)+'.html'
+    with open(fname, 'w') as f:
+        f.write(content.encode('utf-8'))
 
 
 def main():
@@ -51,18 +53,20 @@ def main():
     Main execution
     """
     # grab RSS data and parse it
-    pass
+    feed = feedparser.parse(RSS_URL)
 
     # loop through each article/RSS item
-    for entry in entries:
-
+    for entry in feed.entries:
+        print
         # fetch article using url
-        # hint: content = ???
-        pass
+        url = entry['id']
+        content = requests.get(url)
 
         # save to disk or print an error message
-        # hint: save_article(content)
-        pass
+        try:
+            save_article(content)
+        except:
+            print "Sorry, couldn't get the content for %s" %entry['title_detail']['value']
 
 
 ##########################################################################
