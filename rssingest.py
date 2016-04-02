@@ -37,7 +37,7 @@ def slugify(value):
     return re.sub('[-\s]+', '-', value)
 
 
-def save_article(content):
+def save_article(title, content):
     """
     Save HTML content using a slugged version of the title as the basis for
     the filename
@@ -62,12 +62,13 @@ def main():
         # fetch article using url
         url = entry['id']
         content = requests.get(url)
+        title = entry['title_detail']['value']
 
         # save to disk or print an error message
         try:
-            save_article(content)
+            save_article(title, content)
         except:
-            print "Sorry, couldn't get the content for %s" %entry['title_detail']['value']
+            print "Sorry, couldn't get the content for %s" %title
 
 
 ##########################################################################
