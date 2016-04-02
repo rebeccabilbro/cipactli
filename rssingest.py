@@ -66,7 +66,7 @@ def main():
 
         # save to disk or print an error message
         try:
-            save_article(title, content)
+            save_article(title, content.text)
         except:
             print "Sorry, couldn't get the content for %s" %title
 
