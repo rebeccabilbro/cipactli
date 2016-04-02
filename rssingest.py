@@ -8,7 +8,6 @@ Sample solution for RSS exercise
 ## Imports
 ##########################################################################
 
-import os
 import re
 
 import requests
@@ -56,8 +55,10 @@ def main():
     feed = feedparser.parse(RSS_URL)
 
     # loop through each article/RSS item
+    # remember that the .parse method in feedparser provides a list of items feed.entries
+    # in the same order as the original feed. so the first item is available in feed.entries[0]
     for entry in feed.entries:
-        print
+
         # fetch article using url
         url = entry['id']
         content = requests.get(url)
