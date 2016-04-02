@@ -61,8 +61,8 @@ def main():
 
         # fetch article using url
         url = entry['id']
+        title = entry['title']
         content = requests.get(url)
-        title = entry['title_detail']['value']
 
         # save to disk or print an error message
         try:
