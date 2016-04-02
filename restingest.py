@@ -9,6 +9,7 @@ Template answer for REST Workshop
 ##########################################################################
 
 import json
+import pprint
 import requests
 
 
