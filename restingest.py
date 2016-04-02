@@ -8,7 +8,6 @@ Template answer for REST Workshop
 ## Imports
 ##########################################################################
 
-import os
 import json
 import requests
 
@@ -28,10 +27,10 @@ def fetch_press_releases(URL):
     Performs a GET on the DOJ web service and return the array found in the
     'results' attribute of the JSON response
     """
-    # execute a GET request and store the results
+    # use requests library to execute a GET request and store the results
     response = requests.get(URL)
 
-    # decode as json and store the results
+    # use requests library to decode as json and store the results
     data = response.json()
 
     # return the 'results' array of press releases
@@ -45,10 +44,11 @@ def main():
     # fetch array of press releases
     press_releases = fetch_press_releases(DOJ_RELEASES_URL)
 
-    # iterate press releases
+    # iterate through press releases
     for release in press_releases:
 
         # save content to a new file
+        # we'll use the unique press release identifier to make the filename
         fname = release['uuid']+'.json'
         content = json.dumps(release)
 
