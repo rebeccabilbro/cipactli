@@ -37,7 +37,7 @@ def slugify(value):
     return re.sub('[-\s]+', '-', value)
 
 
-def save_article(title, content):
+def save_article(content):
     """
     Save HTML content using a slugged version of the title as the basis for
     the filename
